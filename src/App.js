@@ -1,25 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import Header from './Header';
 
-function App() {
+export default function App() {
+  function handleClick() {
+    const newValue = parseInt(sessionStorage.getItem('value') || 0) + 1;
+    sessionStorage.setItem('value', newValue);
+    window.dispatchEvent(new Event('sessionStorageUpdated'));
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+<Header/>
+<div>
+        <button onClick={handleClick}>Increment Session Value</button>
+      </div>
     </div>
   );
 }
-
-export default App;
